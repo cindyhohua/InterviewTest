@@ -8,6 +8,7 @@ target 'InterviewTest_Cindy' do
   # Pods for InterviewTest_Cindy
 
 pod 'SnapKit'
+pod 'IQKeyboardManager'
 
   target 'InterviewTest_CindyTests' do
     inherit! :search_paths

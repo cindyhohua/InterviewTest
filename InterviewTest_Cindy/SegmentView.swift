@@ -29,7 +29,7 @@ class SegmentView: UIView {
     }
     
     private func configSelectorView() {
-        selectorView = UIView(frame: CGRect(x: 27, y: self.frame.height - 5, width: 20, height: 4))
+        selectorView = UIView(frame: CGRect(x: 27, y: self.frame.height - 4, width: 20, height: 4))
         selectorView.clipsToBounds = true
         selectorView.layer.cornerRadius = 2
         selectorView.backgroundColor = .kokoPink

@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class FriendsViewController: UIViewController {
+    let tableView = UITableView()
+    
     let rectangleView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteTwo
@@ -55,6 +57,7 @@ class FriendsViewController: UIViewController {
         print("qqq")
         setupNavigationItem()
         addRectangleView()
+        setupTableView()
     }
     
     func setupNavigationItem() {
@@ -104,16 +107,39 @@ class FriendsViewController: UIViewController {
         segmentView.snp.makeConstraints { make in
             make.bottom.equalTo(rectangleView.snp.bottom)
             make.leading.equalTo(view).offset(10)
-            make.height.equalTo(44)
+            make.height.equalTo(35)
             make.width.equalTo(148)
         }
-        
     }
     
     @objc func buttonTapped() {
-        
     }
+}
 
-
+extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func setupTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        let headerView = SearchFriendHeaderView(reuseIdentifier: "SearchFriend")
+        tableView.tableHeaderView = headerView
+        headerView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view)
+            make.height.equalTo(60)
+         }
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(rectangleView.snp.bottom).offset(1)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+        }
+    }
 }
 

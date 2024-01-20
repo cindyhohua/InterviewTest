@@ -23,6 +23,7 @@
 		CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */; };
 		CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */; };
 		CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795B2B5BC1980051DEE3 /* SegmentView.swift */; };
+		CA31795E2B5C09890051DEE3 /* SearchFriendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */; };
 		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		CA31795B2B5BC1980051DEE3 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
+		CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */,
 				CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */,
 				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
+				CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */,
 				CA31795B2B5BC1980051DEE3 /* SegmentView.swift */,
 				CA3179552B5BA4250051DEE3 /* ColorExtension.swift */,
 				CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */,
@@ -421,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA31795E2B5C09890051DEE3 /* SearchFriendHeaderView.swift in Sources */,
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
 				CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */,
 				CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */,
