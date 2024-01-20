@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CD686F05BF9E03E3618F05C /* Pods_InterviewTest_CindyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316FB20C90219C0F67B2C78B /* Pods_InterviewTest_CindyTests.framework */; };
+		3EC542398F288E4F9BE63F9E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FBCF92265E8C9D23DB357E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework */; };
 		CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179202B5B8D540051DEE3 /* AppDelegate.swift */; };
 		CA3179232B5B8D540051DEE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */; };
 		CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */; };
@@ -18,6 +20,8 @@
 		CA3179452B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179442B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift */; };
 		CA3179472B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */; };
 		CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179552B5BA4250051DEE3 /* ColorExtension.swift */; };
+		CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */; };
+		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InterviewTest_Cindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		316FB20C90219C0F67B2C78B /* Pods_InterviewTest_CindyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InterviewTest_CindyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C575113C4CDAEC713C88C /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.debug.xcconfig"; path = "Target Support Files/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		531E70765F75E6D5B6D772E5 /* Pods-InterviewTest_Cindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_Cindy.release.xcconfig"; path = "Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy.release.xcconfig"; sourceTree = "<group>"; };
+		5E72E505DE3B9D6F510E4F63 /* Pods-InterviewTest_CindyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_CindyTests.release.xcconfig"; path = "Target Support Files/Pods-InterviewTest_CindyTests/Pods-InterviewTest_CindyTests.release.xcconfig"; sourceTree = "<group>"; };
+		677CE3056F58E1B7AC99AD7D /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.release.xcconfig"; path = "Target Support Files/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		71C234240504A3AC3C74175D /* Pods-InterviewTest_Cindy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_Cindy.debug.xcconfig"; path = "Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy.debug.xcconfig"; sourceTree = "<group>"; };
+		73FBCF92265E8C9D23DB357E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B062B089B10005848BC60EFE /* Pods-InterviewTest_CindyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InterviewTest_CindyTests.debug.xcconfig"; path = "Target Support Files/Pods-InterviewTest_CindyTests/Pods-InterviewTest_CindyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA31791D2B5B8D540051DEE3 /* InterviewTest_Cindy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterviewTest_Cindy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3179202B5B8D540051DEE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +66,7 @@
 		CA3179442B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewTest_CindyUITests.swift; sourceTree = "<group>"; };
 		CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewTest_CindyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CA3179552B5BA4250051DEE3 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CD686F05BF9E03E3618F05C /* Pods_InterviewTest_CindyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,12 +90,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EC542398F288E4F9BE63F9E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FFAF23F2E4200CE2E3C09EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */,
+				73FBCF92265E8C9D23DB357E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework */,
+				316FB20C90219C0F67B2C78B /* Pods_InterviewTest_CindyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4AFDA21C1968F2C32CC2DB44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71C234240504A3AC3C74175D /* Pods-InterviewTest_Cindy.debug.xcconfig */,
+				531E70765F75E6D5B6D772E5 /* Pods-InterviewTest_Cindy.release.xcconfig */,
+				445C575113C4CDAEC713C88C /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.debug.xcconfig */,
+				677CE3056F58E1B7AC99AD7D /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.release.xcconfig */,
+				B062B089B10005848BC60EFE /* Pods-InterviewTest_CindyTests.debug.xcconfig */,
+				5E72E505DE3B9D6F510E4F63 /* Pods-InterviewTest_CindyTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CA3179142B5B8D540051DEE3 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +127,8 @@
 				CA3179392B5B8D6E0051DEE3 /* InterviewTest_CindyTests */,
 				CA3179432B5B8D6E0051DEE3 /* InterviewTest_CindyUITests */,
 				CA31791E2B5B8D540051DEE3 /* Products */,
+				4AFDA21C1968F2C32CC2DB44 /* Pods */,
+				2FFAF23F2E4200CE2E3C09EE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +147,7 @@
 			children = (
 				CA3179202B5B8D540051DEE3 /* AppDelegate.swift */,
 				CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */,
+				CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */,
 				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
 				CA3179552B5BA4250051DEE3 /* ColorExtension.swift */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
@@ -140,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA31794A2B5B8D6E0051DEE3 /* Build configuration list for PBXNativeTarget "InterviewTest_Cindy" */;
 			buildPhases = (
+				DCC478CF678FF7929243495D /* [CP] Check Pods Manifest.lock */,
 				CA3179192B5B8D540051DEE3 /* Sources */,
 				CA31791A2B5B8D540051DEE3 /* Frameworks */,
 				CA31791B2B5B8D540051DEE3 /* Resources */,
+				C69F758A7333259FEDE39416 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,6 +202,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA31794D2B5B8D6E0051DEE3 /* Build configuration list for PBXNativeTarget "InterviewTest_CindyTests" */;
 			buildPhases = (
+				C15512CBF192B3529ED133A9 /* [CP] Check Pods Manifest.lock */,
 				CA3179322B5B8D6E0051DEE3 /* Sources */,
 				CA3179332B5B8D6E0051DEE3 /* Frameworks */,
 				CA3179342B5B8D6E0051DEE3 /* Resources */,
@@ -175,9 +221,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA3179502B5B8D6E0051DEE3 /* Build configuration list for PBXNativeTarget "InterviewTest_CindyUITests" */;
 			buildPhases = (
+				FE275C297FB945A357674C7B /* [CP] Check Pods Manifest.lock */,
 				CA31793C2B5B8D6E0051DEE3 /* Sources */,
 				CA31793D2B5B8D6E0051DEE3 /* Frameworks */,
 				CA31793E2B5B8D6E0051DEE3 /* Resources */,
+				2FF21E4569B66188DCC12E28 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,6 +307,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2FF21E4569B66188DCC12E28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C15512CBF192B3529ED133A9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InterviewTest_CindyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C69F758A7333259FEDE39416 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCC478CF678FF7929243495D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InterviewTest_Cindy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE275C297FB945A357674C7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InterviewTest_Cindy-InterviewTest_CindyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CA3179192B5B8D540051DEE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -267,6 +418,7 @@
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
 				CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
+				CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */,
 				CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */,
 				CA3179232B5B8D540051DEE3 /* SceneDelegate.swift in Sources */,
 			);
@@ -440,6 +592,7 @@
 		};
 		CA31794B2B5B8D6E0051DEE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71C234240504A3AC3C74175D /* Pods-InterviewTest_Cindy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -469,6 +622,7 @@
 		};
 		CA31794C2B5B8D6E0051DEE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 531E70765F75E6D5B6D772E5 /* Pods-InterviewTest_Cindy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -498,6 +652,7 @@
 		};
 		CA31794E2B5B8D6E0051DEE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B062B089B10005848BC60EFE /* Pods-InterviewTest_CindyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -518,6 +673,7 @@
 		};
 		CA31794F2B5B8D6E0051DEE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E72E505DE3B9D6F510E4F63 /* Pods-InterviewTest_CindyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -538,6 +694,7 @@
 		};
 		CA3179512B5B8D6E0051DEE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445C575113C4CDAEC713C88C /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -556,6 +713,7 @@
 		};
 		CA3179522B5B8D6E0051DEE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 677CE3056F58E1B7AC99AD7D /* Pods-InterviewTest_Cindy-InterviewTest_CindyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

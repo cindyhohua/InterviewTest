@@ -7,6 +7,9 @@
 import UIKit
 
 extension UIColor {
+    @nonobjc class var realWhite: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 255.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+    }
     @nonobjc class var kokoPink: UIColor {
         return UIColor(red: 236.0 / 255.0, green: 0 / 255.0, blue: 140.0 / 255.0, alpha: 1.0)
     }
