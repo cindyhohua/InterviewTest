@@ -21,6 +21,7 @@
 		CA3179472B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */; };
 		CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179552B5BA4250051DEE3 /* ColorExtension.swift */; };
 		CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */; };
+		CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */; };
 		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewTest_CindyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CA3179552B5BA4250051DEE3 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */,
 				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
 				CA3179552B5BA4250051DEE3 /* ColorExtension.swift */,
+				CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
 				CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */,
 				CA31792E2B5B8D6D0051DEE3 /* LaunchScreen.storyboard */,
@@ -417,6 +420,7 @@
 			files = (
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
 				CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */,
+				CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
 				CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */,
 				CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */,
