@@ -45,6 +45,10 @@ class FriendsViewController: UIViewController {
         return imageView
     }()
     
+    lazy var segmentView = SegmentView(
+        frame: CGRect(x: 0, y: 0, width: 148, height: 44),
+        buttonTitle: ["好友", "聊天"])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.realWhite
@@ -66,11 +70,12 @@ class FriendsViewController: UIViewController {
         navigationItem.leftBarButtonItems = [withdrawButton, transferButton]
         navigationItem.rightBarButtonItem = scanButton
     }
+    
     func addRectangleView() {
         view.addSubview(rectangleView)
         rectangleView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view)
-            make.height.equalTo(270)
+            make.height.equalTo(250)
         }
         view.addSubview(seperatorView)
         seperatorView.snp.makeConstraints { make in
@@ -95,6 +100,14 @@ class FriendsViewController: UIViewController {
             make.height.width.equalTo(52)
         }
         userImageView.layer.cornerRadius = 26
+        rectangleView.addSubview(segmentView)
+        segmentView.snp.makeConstraints { make in
+            make.bottom.equalTo(rectangleView.snp.bottom)
+            make.leading.equalTo(view).offset(10)
+            make.height.equalTo(44)
+            make.width.equalTo(148)
+        }
+        
     }
     
     @objc func buttonTapped() {

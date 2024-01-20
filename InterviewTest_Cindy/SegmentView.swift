@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol SegmentControlDelegate {
     func changeToIndex(_ manager: SegmentView ,index: Int)
@@ -13,8 +14,7 @@ protocol SegmentControlDelegate {
 
 class SegmentView: UIView {
     private var buttonTitles: [String]!
-    var buttons: [UIButton]!
-    private var allView: UIView!
+    private var buttons: [UIButton]!
     private var selectorView: UIView!
     var delegate: SegmentControlDelegate?
     private func configStackView() {
@@ -23,20 +23,16 @@ class SegmentView: UIView {
         stack.alignment = .fill
         stack.distribution = .fillEqually
         addSubview(stack)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
     }
     
     private func configSelectorView() {
-        allView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: frame.width, height: 1.5))
-        allView.backgroundColor = UIColor.lightGray
-        let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
-        selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: 1.5))
-        selectorView.backgroundColor = UIColor.darkGray
-        addSubview(allView)
+        selectorView = UIView(frame: CGRect(x: 27, y: self.frame.height - 5, width: 20, height: 4))
+        selectorView.clipsToBounds = true
+        selectorView.layer.cornerRadius = 2
+        selectorView.backgroundColor = .kokoPink
         addSubview(selectorView)
     }
     
@@ -48,22 +44,24 @@ class SegmentView: UIView {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action: #selector(SegmentView.buttonAction(sender:)), for: .touchUpInside)
-            button.setTitleColor(UIColor.gray, for: .normal)
+            button.setTitleColor(.greyishBrown, for: .normal)
+            button.titleLabel?.font = .textStyle
             buttons.append(button)
         }
-        buttons[0].setTitleColor(UIColor.black, for: .normal)
+        buttons[0].setTitleColor(.greyishBrown, for: .normal)
+        buttons[0].titleLabel?.font = .textStyle2
     }
     
     @objc func buttonAction(sender: UIButton) {
         for (buttonIndex, btn) in buttons.enumerated() {
-            btn.setTitleColor(UIColor.gray, for: .normal)
+            btn.titleLabel?.font = .textStyle
             if btn == sender {
                 let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
                 self.delegate?.changeToIndex(self, index: buttonIndex)
                 UIView.animate(withDuration: 0.3) {
-                    self.selectorView.frame.origin.x = selectorPosition
+                    self.selectorView.frame.origin.x = selectorPosition + 27
                 }
-                btn.setTitleColor(UIColor.black, for: .normal)
+                btn.titleLabel?.font = .textStyle2
             }
         }
     }
