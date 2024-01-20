@@ -21,14 +21,39 @@ class FriendsViewController: UIViewController {
         return view
     }()
     
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.textStyle4
+        label.textColor = UIColor.greyishBrown
+        label.text = "庫洛洛·魯西魯"
+        return label
+    }()
+    
+    let idLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.textStyle
+        label.textColor = UIColor.greyishBrown
+        label.text = "KOKO ID：幻影旅團團長"
+        return label
+    }()
+    
+    let userImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "庫洛洛頭貼")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.realWhite
         print("qqq")
-        addView()
+        setupNavigationItem()
+        addRectangleView()
     }
     
-    func addView() {
+    func setupNavigationItem() {
         let withdrawButton = UIBarButtonItem(
             image: UIImage(named: "icNavPinkWithdraw"),
             style: .plain, target: self, action: #selector(buttonTapped))
@@ -40,6 +65,8 @@ class FriendsViewController: UIViewController {
             style: .plain, target: self, action: #selector(buttonTapped))
         navigationItem.leftBarButtonItems = [withdrawButton, transferButton]
         navigationItem.rightBarButtonItem = scanButton
+    }
+    func addRectangleView() {
         view.addSubview(rectangleView)
         rectangleView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view)
@@ -51,6 +78,23 @@ class FriendsViewController: UIViewController {
             make.leading.trailing.equalTo(view)
             make.height.equalTo(1)
         }
+        rectangleView.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(view).offset(30)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(35)
+        }
+        rectangleView.addSubview(idLabel)
+        idLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nameLabel)
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+        }
+        rectangleView.addSubview(userImageView)
+        userImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(view).offset(-30)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(37)
+            make.height.width.equalTo(52)
+        }
+        userImageView.layer.cornerRadius = 26
     }
     
     @objc func buttonTapped() {
