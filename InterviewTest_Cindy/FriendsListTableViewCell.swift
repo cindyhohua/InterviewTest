@@ -95,42 +95,17 @@ class FriendsListTableViewCell: UITableViewCell {
             make.bottom.equalTo(contentView)
         }
     }
-        
-//        checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-//        checkButton.snp.makeConstraints { make in
-//            make.centerY.equalTo(contentView)
-//            make.trailing.equalTo(contentView).offset(-15)
-//            make.width.height.equalTo(50)
-//        }
-//        checkButton.isHidden = true
-//
-//        clothButton.setImage(UIImage(systemName: "tshirt.fill"), for: .normal)
-//        clothButton.tintColor = .lightBrown()
-//        clothButton.snp.makeConstraints { make in
-//            make.trailing.equalTo(contentView).offset(-16)
-//            make.width.height.equalTo(70)
-//            make.centerY.equalTo(contentView)
-//        }
-//        clothButton.addTarget(self, action: #selector(clothButtonTapped), for: .touchUpInside)
-//    }
-    
-//    func configure(with imageData: Data, name: String, clothOrNot: Bool) {
-//        circularImageView.image = UIImage(data: imageData)
-//        nameLabel.text = name
-//        if clothOrNot == true {
-//            clothButton.setImage(UIImage(named: "編輯")?.withTintColor(.lightLightBrown()), for: .normal)
-//        } else {
-//            clothButton.setImage(UIImage(named: "已建")?.withTintColor(.lightBrown()), for: .normal)
-//        }
-//    }
-//
-    func configureWithoutImage(name: String, liked: Bool, pending: Bool) {
+
+    func configureWithoutImage(name: String, liked: Bool) {
         circularImageView.image = UIImage(named: "imgFriendsList")
         nameLabel.text = name
         switch liked {
         case true: likedFriend()
         case false: likedButton.removeFromSuperview()
         }
+    }
+    
+    func configurePending(pending: Bool) {
         pendingButton.removeFromSuperview()
         trasferButton.removeFromSuperview()
         friendMoreButton.removeFromSuperview()

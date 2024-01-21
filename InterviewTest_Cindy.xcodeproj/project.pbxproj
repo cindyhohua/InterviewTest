@@ -20,7 +20,7 @@
 		CA3179452B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179442B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift */; };
 		CA3179472B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */; };
 		CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179552B5BA4250051DEE3 /* ColorExtension.swift */; };
-		CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */; };
+		CA3179582B5BB77F0051DEE3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179572B5BB77F0051DEE3 /* APIManager.swift */; };
 		CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */; };
 		CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795B2B5BC1980051DEE3 /* SegmentView.swift */; };
 		CA31795E2B5C09890051DEE3 /* SearchFriendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */; };
@@ -70,7 +70,7 @@
 		CA3179442B5B8D6E0051DEE3 /* InterviewTest_CindyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewTest_CindyUITests.swift; sourceTree = "<group>"; };
 		CA3179462B5B8D6E0051DEE3 /* InterviewTest_CindyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewTest_CindyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CA3179552B5BA4250051DEE3 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		CA3179572B5BB77F0051DEE3 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		CA31795B2B5BC1980051DEE3 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendHeaderView.swift; sourceTree = "<group>"; };
@@ -155,13 +155,13 @@
 			children = (
 				CA3179202B5B8D540051DEE3 /* AppDelegate.swift */,
 				CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */,
-				CA3179572B5BB77F0051DEE3 /* FriendsModel.swift */,
-				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
-				CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */,
-				CA31795F2B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift */,
-				CA31795B2B5BC1980051DEE3 /* SegmentView.swift */,
 				CA3179552B5BA4250051DEE3 /* ColorExtension.swift */,
 				CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */,
+				CA3179572B5BB77F0051DEE3 /* APIManager.swift */,
+				CA31795B2B5BC1980051DEE3 /* SegmentView.swift */,
+				CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */,
+				CA31795F2B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift */,
+				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
 				CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */,
 				CA31792E2B5B8D6D0051DEE3 /* LaunchScreen.storyboard */,
@@ -434,7 +434,7 @@
 				CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */,
 				CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
-				CA3179582B5BB77F0051DEE3 /* FriendsModel.swift in Sources */,
+				CA3179582B5BB77F0051DEE3 /* APIManager.swift in Sources */,
 				CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */,
 				CA3179232B5B8D540051DEE3 /* SceneDelegate.swift in Sources */,
 			);

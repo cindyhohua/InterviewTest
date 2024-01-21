@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class FriendsViewController: UIViewController {
+    var friendList: [Response] = []
+    
     let tableView = UITableView()
     
     let rectangleView: UIView = {
@@ -23,25 +25,23 @@ class FriendsViewController: UIViewController {
         return view
     }()
     
-    let nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.textStyle4
         label.textColor = UIColor.greyishBrown
-        label.text = "庫洛洛·魯西魯"
         return label
     }()
     
-    let idLabel: UILabel = {
+    lazy var idLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.textStyle
         label.textColor = UIColor.greyishBrown
-        label.text = "KOKO ID：幻影旅團團長"
         return label
     }()
     
     let userImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "庫洛洛頭貼")
+        imageView.image = UIImage(named: "imgFriendsFemaleDefault")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -54,10 +54,57 @@ class FriendsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.realWhite
-        print("qqq")
         setupNavigationItem()
         addRectangleView()
         setupTableView()
+        fetchUserData()
+        fetchFriendData()
+    }
+    
+    func fetchUserData() {
+        APIManager.shared.fetchUserData { result in
+            switch result {
+            case .success(let userData):
+                DispatchQueue.main.async {
+                    self.nameLabel.text = userData.response[0].name
+                    if let kokoid = userData.response[0].kokoid {
+                        self.idLabel.text = "KOKO ID：" + kokoid
+                    } else {
+                        self.idLabel.text = "設定KOKO ID"
+                    }
+                }
+            case .failure(let error):
+                switch error {
+                 case .invalidURL:
+                     print("Invalid URL error")
+                 case .noData:
+                     print("No data received error")
+                 case .jsonParsingError(let parseError):
+                     print("JSON parsing error: \(parseError)")
+                 }
+            }
+        }
+    }
+    
+    func fetchFriendData() {
+        APIManager.shared.fetchFriendData(.friend3) { result in
+            switch result {
+            case .success(let userData):
+                DispatchQueue.main.async {
+                    self.friendList = userData.response
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                switch error {
+                 case .invalidURL:
+                     print("Invalid URL error")
+                 case .noData:
+                     print("No data received error")
+                 case .jsonParsingError(let parseError):
+                     print("JSON parsing error: \(parseError)")
+                 }
+            }
+        }
     }
     
     func setupNavigationItem() {
@@ -135,7 +182,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        20
+        friendList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,10 +192,21 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Cant find cell")
         }
         cell.selectionStyle = .none
-        if indexPath.row % 2 == 0 {
-            cell.configureWithoutImage(name: "庫洛洛", liked: true, pending: true)
-        } else {
-            cell.configureWithoutImage(name: "西索", liked: false, pending: false)
+        let friend = friendList[indexPath.row]
+        switch friend.isTop {
+        case "0":
+            cell.configureWithoutImage(name: friend.name, liked: false)
+        case "1":
+            cell.configureWithoutImage(name: friend.name, liked: true)
+        default:
+            cell.configureWithoutImage(name: friend.name, liked: false)
+        }
+        switch friend.status {
+        case 0:
+            cell.configurePending(pending: true)
+        default:
+            cell.configurePending(pending: false)
+
         }
         return cell
     }
