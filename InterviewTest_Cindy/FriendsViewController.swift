@@ -10,6 +10,7 @@ import SnapKit
 
 class FriendsViewController: UIViewController {
     var friendList: [Response] = []
+    var pendingList: [Response] = []
     
     let tableView = UITableView()
     
@@ -87,11 +88,17 @@ class FriendsViewController: UIViewController {
     }
     
     func fetchFriendData() {
-        APIManager.shared.fetchFriendData(.friend3) { result in
+        APIManager.shared.fetchFriendData { result in
             switch result {
-            case .success(let userData):
+            case .success(let friendData):
                 DispatchQueue.main.async {
-                    self.friendList = userData.response
+                    friendData.response.forEach { data in
+                        if data.status == 2 {
+                            self.pendingList.append(data)
+                        } else {
+                            self.friendList.append(data)
+                        }
+                    }
                     self.tableView.reloadData()
                 }
             case .failure(let error):
@@ -202,10 +209,10 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureWithoutImage(name: friend.name, liked: false)
         }
         switch friend.status {
-        case 0:
-            cell.configurePending(pending: true)
-        default:
+        case 1:
             cell.configurePending(pending: false)
+        default:
+            cell.configurePending(pending: true)
 
         }
         return cell

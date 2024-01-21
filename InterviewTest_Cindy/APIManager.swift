@@ -40,8 +40,10 @@ class APIManager {
     
     typealias FetchCompletion<T> = (Result<T, APIError>) -> Void
     
-    func fetchFriendData(_ friend: APIEndpoint, completion: @escaping FetchCompletion<APIResponse>) {
-        guard let url = URL(string: urlString + friend.rawValue) else {
+    var endPoint: APIEndpoint = .friend3
+    
+    func fetchFriendData(completion: @escaping FetchCompletion<APIResponse>) {
+        guard let url = URL(string: urlString + endPoint.rawValue) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -49,7 +51,11 @@ class APIManager {
     }
     
     func fetchUserData(completion: @escaping FetchCompletion<APIResponse>) {
-        fetchFriendData(.userData, completion: completion)
+        guard let url = URL(string: urlString + APIEndpoint.userData.rawValue) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        fetchData(from: url, completion: completion)
     }
     
     private func fetchData<T: Codable>(from url: URL, completion: @escaping FetchCompletion<T>) {

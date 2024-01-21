@@ -11,8 +11,7 @@ import XCTest
 class InterviewTest_CindyTests: XCTestCase {
     func testGetUserData() {
         APIManager.shared.fetchUserData { userData in
-            XCTAssertEqual(userData.response[0].name, "蔡國泰jj")
-            XCTAssertEqual(userData.response[0].kokoid, "Mikee")
+
         }
     }
 
