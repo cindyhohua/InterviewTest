@@ -8,6 +8,9 @@
 import UIKit
 
 extension UIFont {
+    class var textStyle5: UIFont {
+        return UIFont(name: "PingFangTC-Regular", size: 14.0)!
+    }
     class var textStyle4: UIFont {
         return UIFont(name: "PingFangTC-Medium", size: 17.0)!
     }

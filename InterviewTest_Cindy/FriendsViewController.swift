@@ -117,29 +117,41 @@ class FriendsViewController: UIViewController {
 }
 
 extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
     func setupTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        let headerView = SearchFriendHeaderView(reuseIdentifier: "SearchFriend")
+        let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
         tableView.tableHeaderView = headerView
-        headerView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view)
-            make.height.equalTo(60)
-         }
+        tableView.separatorStyle = .none
+        tableView.register(
+            FriendsListTableViewCell.self,
+            forCellReuseIdentifier: "friendList")
         tableView.snp.makeConstraints { make in
             make.top.equalTo(rectangleView.snp.bottom).offset(1)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.leading.trailing.equalToSuperview()
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        20
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "friendList",
+            for: indexPath) as? FriendsListTableViewCell else {
+            fatalError("Cant find cell")
+        }
+        cell.selectionStyle = .none
+        if indexPath.row % 2 == 0 {
+            cell.configureWithoutImage(name: "庫洛洛", liked: true, pending: true)
+        } else {
+            cell.configureWithoutImage(name: "西索", liked: false, pending: false)
+        }
+        return cell
+    }
+
 }
 

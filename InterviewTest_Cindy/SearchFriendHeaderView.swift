@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SearchFriendHeaderView: UITableViewHeaderFooterView {
+class SearchFriendHeaderView: UIView {
     private let searchTextField: UITextField = {
         let textField = UITextField()
         let button = UIButton()
@@ -16,7 +16,7 @@ class SearchFriendHeaderView: UITableViewHeaderFooterView {
             string: "想轉一筆給誰呢？",
             attributes: [
                 NSAttributedString.Key.foregroundColor : UIColor.steel,
-                NSAttributedString.Key.font : UIFont.textStyle
+                NSAttributedString.Key.font : UIFont.textStyle5
             ])
         textField.backgroundColor = .steel12
         textField.layer.cornerRadius = 10
@@ -40,8 +40,8 @@ class SearchFriendHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupViews()
     }
     
