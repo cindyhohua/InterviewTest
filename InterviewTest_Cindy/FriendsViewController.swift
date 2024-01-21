@@ -10,11 +10,18 @@ import SnapKit
 
 class FriendsViewController: UIViewController {
     var friendList: [Response] = []
-    var pendingList: [Response] = []
+    var requestList: [Response] = []
+    var isExpanded: Bool = false
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .plain)
     
     let rectangleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.whiteTwo
+        return view
+    }()
+    
+    let footerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteTwo
         return view
@@ -48,10 +55,6 @@ class FriendsViewController: UIViewController {
         return imageView
     }()
     
-    lazy var segmentView = SegmentView(
-        frame: CGRect(x: 0, y: 0, width: 148, height: 44),
-        buttonTitle: ["好友", "聊天"])
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.realWhite
@@ -75,14 +78,7 @@ class FriendsViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                switch error {
-                 case .invalidURL:
-                     print("Invalid URL error")
-                 case .noData:
-                     print("No data received error")
-                 case .jsonParsingError(let parseError):
-                     print("JSON parsing error: \(parseError)")
-                 }
+                print(error.localizedDescription)
             }
         }
     }
@@ -94,7 +90,7 @@ class FriendsViewController: UIViewController {
                 DispatchQueue.main.async {
                     friendData.response.forEach { data in
                         if data.status == 2 {
-                            self.pendingList.append(data)
+                            self.requestList.append(data)
                         } else {
                             self.friendList.append(data)
                         }
@@ -102,14 +98,7 @@ class FriendsViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                switch error {
-                 case .invalidURL:
-                     print("Invalid URL error")
-                 case .noData:
-                     print("No data received error")
-                 case .jsonParsingError(let parseError):
-                     print("JSON parsing error: \(parseError)")
-                 }
+                print(error.localizedDescription)
             }
         }
     }
@@ -130,16 +119,6 @@ class FriendsViewController: UIViewController {
     
     func addRectangleView() {
         view.addSubview(rectangleView)
-        rectangleView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view)
-            make.height.equalTo(250)
-        }
-        view.addSubview(seperatorView)
-        seperatorView.snp.makeConstraints { make in
-            make.top.equalTo(rectangleView.snp.bottom)
-            make.leading.trailing.equalTo(view)
-            make.height.equalTo(1)
-        }
         rectangleView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(view).offset(30)
@@ -157,17 +136,13 @@ class FriendsViewController: UIViewController {
             make.height.width.equalTo(52)
         }
         userImageView.layer.cornerRadius = 26
-        rectangleView.addSubview(segmentView)
-        segmentView.snp.makeConstraints { make in
-            make.bottom.equalTo(rectangleView.snp.bottom)
-            make.leading.equalTo(view).offset(10)
-            make.height.equalTo(35)
-            make.width.equalTo(148)
+        rectangleView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(view)
+            make.bottom.equalTo(idLabel).offset(10)
         }
     }
     
-    @objc func buttonTapped() {
-    }
+    @objc func buttonTapped() {}
 }
 
 extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -175,48 +150,120 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
-        tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets.zero
+        tableView.sectionHeaderHeight = CGFloat.leastNormalMagnitude
+        tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         tableView.register(
             FriendsListTableViewCell.self,
             forCellReuseIdentifier: "friendList")
+        tableView.register(
+            RequestTableViewCell.self,
+            forCellReuseIdentifier: "requestList")
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(rectangleView.snp.bottom).offset(1)
+            make.top.equalTo(rectangleView.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.leading.trailing.equalToSuperview()
         }
     }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friendList.count
+        switch section {
+        case 0:
+            switch requestList.count {
+            case 0: return 0
+            default: return self.isExpanded ? requestList.count : 1
+            }
+        case 1: return friendList.count
+        default: return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section{
+        case 1:
+            let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
+            return headerView
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section{
+        case 0:
+            return 0
+        default:
+            return 40
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section{
+        case 0:
+            let view = FooterView()
+            return view
+        default:
+            return nil
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section{
+        case 0:
+            return 40
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "friendList",
-            for: indexPath) as? FriendsListTableViewCell else {
-            fatalError("Cant find cell")
-        }
-        cell.selectionStyle = .none
-        let friend = friendList[indexPath.row]
-        switch friend.isTop {
-        case "0":
-            cell.configureWithoutImage(name: friend.name, liked: false)
-        case "1":
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "requestList",
+                for: indexPath) as? RequestTableViewCell else {
+                fatalError("Cant find cell")
+            }
+            cell.selectionStyle = .none
+            let friend = requestList[indexPath.row]
+            cell.expanded(isExpanded: self.isExpanded)
             cell.configureWithoutImage(name: friend.name, liked: true)
+            return cell
         default:
-            cell.configureWithoutImage(name: friend.name, liked: false)
-        }
-        switch friend.status {
-        case 1:
-            cell.configurePending(pending: false)
-        default:
-            cell.configurePending(pending: true)
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "friendList",
+                for: indexPath) as? FriendsListTableViewCell else {
+                fatalError("Cant find cell")
+            }
+            cell.selectionStyle = .none
+            let friend = friendList[indexPath.row]
+            switch friend.isTop {
+            case "1":
+                cell.configureWithoutImage(name: friend.name, liked: true)
+            default:
+                cell.configureWithoutImage(name: friend.name, liked: false)
+            }
+            switch friend.status {
+            case 1:
+                cell.configurePending(pending: false)
+            default:
+                cell.configurePending(pending: true)
 
+            }
+            return cell
         }
-        return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                self.isExpanded = !self.isExpanded
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
 

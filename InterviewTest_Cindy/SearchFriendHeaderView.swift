@@ -56,14 +56,14 @@ class SearchFriendHeaderView: UIView {
         searchTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.height.equalTo(36)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
         addFriendButton.snp.makeConstraints { make in
             make.leading.equalTo(searchTextField.snp.trailing).offset(15)
             make.trailing.equalToSuperview().offset(-30)
             make.height.width.equalTo(24)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(searchTextField)
         }
     }
 }

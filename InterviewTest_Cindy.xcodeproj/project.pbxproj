@@ -25,6 +25,8 @@
 		CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795B2B5BC1980051DEE3 /* SegmentView.swift */; };
 		CA31795E2B5C09890051DEE3 /* SearchFriendHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */; };
 		CA3179602B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31795F2B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift */; };
+		CA3179622B5D1D9F0051DEE3 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179612B5D1D9F0051DEE3 /* FooterView.swift */; };
+		CA3179642B5D29970051DEE3 /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179632B5D29970051DEE3 /* RequestTableViewCell.swift */; };
 		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		CA31795B2B5BC1980051DEE3 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendHeaderView.swift; sourceTree = "<group>"; };
 		CA31795F2B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewCell.swift; sourceTree = "<group>"; };
+		CA3179612B5D1D9F0051DEE3 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		CA3179632B5D29970051DEE3 /* RequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +164,9 @@
 				CA3179572B5BB77F0051DEE3 /* APIManager.swift */,
 				CA31795B2B5BC1980051DEE3 /* SegmentView.swift */,
 				CA31795D2B5C09890051DEE3 /* SearchFriendHeaderView.swift */,
+				CA3179612B5D1D9F0051DEE3 /* FooterView.swift */,
 				CA31795F2B5C1AEA0051DEE3 /* FriendsListTableViewCell.swift */,
+				CA3179632B5D29970051DEE3 /* RequestTableViewCell.swift */,
 				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
 				CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */,
@@ -432,7 +438,9 @@
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
 				CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */,
 				CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */,
+				CA3179642B5D29970051DEE3 /* RequestTableViewCell.swift in Sources */,
 				CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */,
+				CA3179622B5D1D9F0051DEE3 /* FooterView.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
 				CA3179582B5BB77F0051DEE3 /* APIManager.swift in Sources */,
 				CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */,
