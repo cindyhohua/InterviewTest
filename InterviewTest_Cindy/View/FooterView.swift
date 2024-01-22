@@ -7,7 +7,7 @@
 
 import UIKit
 class FooterView: UIView {
-    let seperatorView: UIView = {
+    private let seperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteThree
         return view

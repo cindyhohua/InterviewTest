@@ -50,6 +50,7 @@ class SearchFriendHeaderView: UIView {
     }
     
     private func setupViews() {
+        backgroundColor = .realWhite
         addSubview(searchTextField)
         addSubview(addFriendButton)
         

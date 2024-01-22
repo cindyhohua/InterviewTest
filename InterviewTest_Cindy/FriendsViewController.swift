@@ -185,8 +185,13 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section{
         case 1:
-            let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
-            return headerView
+            if friendList.count != 0 {
+                let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
+                return headerView
+            } else {
+                let headerView = NoDataView(frame: .zero)
+                return headerView
+            }
         default:
             return nil
         }
@@ -197,7 +202,11 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 0
         default:
-            return 40
+            if friendList.count != 0 {
+                return 40
+            } else {
+                return 500
+            }
         }
     }
     
