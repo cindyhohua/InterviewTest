@@ -7,6 +7,8 @@
 
 import UIKit
 class FooterView: UIView {
+    private let buttonBadge: [Int]
+    
     private let seperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteThree
@@ -15,15 +17,16 @@ class FooterView: UIView {
     
     lazy var segmentView = SegmentView(
         frame: CGRect(x: 0, y: 0, width: 148, height: 44),
-        buttonTitle: ["好友", "聊天"])
+        buttonTitle: ["好友", "聊天"], buttonBadge: buttonBadge)
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, buttonBadge: [Int]) {
+        self.buttonBadge = buttonBadge
         super.init(frame: frame)
         setupViews()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupViews() {

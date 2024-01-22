@@ -224,7 +224,13 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section{
         case 0:
-            let view = FooterView()
+            var count = 0
+            for friend in friendList {
+                if friend.status == 2 {
+                    count += 1
+                }
+            }
+            let view = FooterView(frame: .zero, buttonBadge: [count, 100])
             return view
         default:
             return nil
