@@ -9,6 +9,7 @@ target 'InterviewTest_Cindy' do
 
 pod 'SnapKit'
 pod 'IQKeyboardManager'
+pod 'PullToRefreshKit'
 
   target 'InterviewTest_CindyTests' do
     inherit! :search_paths

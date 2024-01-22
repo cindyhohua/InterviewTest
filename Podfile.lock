@@ -1,20 +1,24 @@
 PODS:
   - IQKeyboardManager (6.5.16)
+  - PullToRefreshKit (0.8.8)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - IQKeyboardManager
+  - PullToRefreshKit
   - SnapKit
 
 SPEC REPOS:
   trunk:
     - IQKeyboardManager
+    - PullToRefreshKit
     - SnapKit
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 024b54d7dcb765c5bc99882cb4d5ea24a8cb7c3c
+  PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 108223bd2b88cb6899b0d2cfe1c684095b9289af
+PODFILE CHECKSUM: 18c6f083ef755874d09a24f13f2f1ecfb8a694d8
 
 COCOAPODS: 1.13.0

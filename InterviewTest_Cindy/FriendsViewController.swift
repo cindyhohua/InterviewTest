@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import PullToRefreshKit
 
 class FriendsViewController: UIViewController {
     var friendList: [Response] = []
@@ -63,6 +64,15 @@ class FriendsViewController: UIViewController {
         setupTableView()
         fetchUserData()
         fetchFriendData()
+        setupRefreshHeader()
+    }
+    
+    private func setupRefreshHeader() {
+        tableView.configRefreshHeader(container: self) { [weak self] in
+            self?.friendList = []
+            self?.requestList = []
+            self?.fetchFriendData()
+        }
     }
     
     func fetchUserData() {
@@ -96,6 +106,7 @@ class FriendsViewController: UIViewController {
                         }
                     }
                     self.tableView.reloadData()
+                    self.tableView.switchRefreshHeader(to: .normal(.success, 0.5))
                 }
             case .failure(let error):
                 print(error.localizedDescription)

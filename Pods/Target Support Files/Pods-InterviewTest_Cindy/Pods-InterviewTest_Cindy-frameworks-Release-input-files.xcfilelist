@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-InterviewTest_Cindy/Pods-InterviewTest_Cindy-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework
+${BUILT_PRODUCTS_DIR}/PullToRefreshKit/PullToRefreshKit.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
