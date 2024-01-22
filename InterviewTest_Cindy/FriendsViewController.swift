@@ -12,6 +12,7 @@ import PullToRefreshKit
 class FriendsViewController: UIViewController {
     var friendList: [Response] = []
     var requestList: [Response] = []
+    var filteredFriendList: [Response] = []
     var isExpanded: Bool = false
     
     let tableView = UITableView(frame: .zero, style: .plain)
@@ -19,18 +20,6 @@ class FriendsViewController: UIViewController {
     let rectangleView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteTwo
-        return view
-    }()
-    
-    let footerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.whiteTwo
-        return view
-    }()
-    
-    let seperatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.whiteThree
         return view
     }()
     
@@ -105,6 +94,7 @@ class FriendsViewController: UIViewController {
                             self.friendList.append(data)
                         }
                     }
+                    self.filteredFriendList = self.friendList
                     self.tableView.reloadData()
                     self.tableView.switchRefreshHeader(to: .normal(.success, 0.5))
                 }
@@ -188,7 +178,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             case 0: return 0
             default: return self.isExpanded ? requestList.count : 1
             }
-        case 1: return friendList.count
+        case 1: return filteredFriendList.count
         default: return 0
         }
     }
@@ -198,6 +188,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             if friendList.count != 0 {
                 let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
+                headerView.delegate = self
                 return headerView
             } else {
                 let headerView = NoDataView(frame: .zero)
@@ -224,12 +215,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section{
         case 0:
-            var count = 0
-            for friend in friendList {
-                if friend.status == 2 {
-                    count += 1
-                }
-            }
+            let count = friendList.filter { $0.status == 2 }.count
             let view = FooterView(frame: .zero, buttonBadge: [count, 100])
             return view
         default:
@@ -269,7 +255,7 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
                 fatalError("Cant find cell")
             }
             cell.selectionStyle = .none
-            let friend = friendList[indexPath.row]
+            let friend = filteredFriendList[indexPath.row]
             switch friend.isTop {
             case "1":
                 cell.configureWithoutImage(name: friend.name, liked: true)
@@ -293,5 +279,21 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             self.tableView.reloadData()
         }
     }
+}
+
+extension FriendsViewController: SearchFriendHeaderViewDelegate {
+    func didChangeSearchText(_ searchText: String) {
+        print(searchText)
+        filterContentForSearchText(searchText)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+            if searchText.isEmpty {
+                filteredFriendList = friendList
+            } else {
+                filteredFriendList = friendList.filter { $0.name.contains(searchText) }
+            }
+            tableView.reloadData()
+        }
 }
 

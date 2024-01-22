@@ -8,30 +8,18 @@
 import UIKit
 import SnapKit
 
+protocol SearchFriendHeaderViewDelegate: AnyObject {
+    func didChangeSearchText(_ searchText: String)
+}
+
 class SearchFriendHeaderView: UIView {
-    private let searchTextField: UITextField = {
-        let textField = UITextField()
-        let button = UIButton()
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "想轉一筆給誰呢？",
-            attributes: [
-                NSAttributedString.Key.foregroundColor : UIColor.steel,
-                NSAttributedString.Key.font : UIFont.textStyle5
-            ])
-        textField.backgroundColor = .steel12
-        textField.layer.cornerRadius = 10
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(32, 0, 0)
-        textField.isUserInteractionEnabled = true
-        textField.addSubview(button)
-        button.setImage(
-            UIImage(named: "icSearchBarSearchGray"),
-            for: .normal)
-        button.snp.makeConstraints { make in
-            make.trailing.equalTo(textField.snp.leading).offset(-8)
-            make.width.height.equalTo(14)
-            make.centerY.equalTo(textField)
-        }
-        return textField
+    weak var delegate: SearchFriendHeaderViewDelegate?
+
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = "想轉一筆給誰呢？"
+        return searchBar
     }()
     
     private let addFriendButton: UIButton = {
@@ -43,6 +31,7 @@ class SearchFriendHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        searchBar.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -51,21 +40,27 @@ class SearchFriendHeaderView: UIView {
     
     private func setupViews() {
         backgroundColor = .realWhite
-        addSubview(searchTextField)
+        addSubview(searchBar)
         addSubview(addFriendButton)
         
-        searchTextField.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.height.equalTo(36)
             make.top.equalToSuperview()
         }
         
         addFriendButton.snp.makeConstraints { make in
-            make.leading.equalTo(searchTextField.snp.trailing).offset(15)
+            make.leading.equalTo(searchBar.snp.trailing).offset(15)
             make.trailing.equalToSuperview().offset(-30)
             make.height.width.equalTo(24)
-            make.centerY.equalTo(searchTextField)
+            make.centerY.equalTo(searchBar)
         }
+    }
+}
+
+extension SearchFriendHeaderView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        delegate?.didChangeSearchText(searchText)
     }
 }
 
