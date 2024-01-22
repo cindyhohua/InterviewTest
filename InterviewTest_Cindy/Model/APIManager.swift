@@ -25,10 +25,10 @@ enum APIEndpoint: String {
     case friend4 = "friend4.json"
 }
 
-enum Condition {
-    case noData
-    case onlyFriendsData
-    case friendsDataAndRequest
+enum Condition: String {
+    case noData = "No data"
+    case onlyFriendsData = "Only friends"
+    case friendsDataAndRequest = "Friends and request"
 }
 
 enum APIError: Error {
@@ -46,7 +46,7 @@ class APIManager {
     
     typealias FetchCompletion = (Result<[Response], APIError>) -> Void
     
-    var condition: Condition = .noData
+    var condition: Condition = .onlyFriendsData
     
     func fetchFriendData(completion: @escaping FetchCompletion) {
         let endpoints: [APIEndpoint]
