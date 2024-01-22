@@ -70,8 +70,8 @@ class FriendsViewController: UIViewController {
             switch result {
             case .success(let userData):
                 DispatchQueue.main.async {
-                    self.nameLabel.text = userData.response[0].name
-                    if let kokoid = userData.response[0].kokoid {
+                    self.nameLabel.text = userData[0].name
+                    if let kokoid = userData[0].kokoid {
                         self.idLabel.text = "KOKO ID：" + kokoid
                     } else {
                         self.idLabel.text = "設定KOKO ID"
@@ -88,8 +88,8 @@ class FriendsViewController: UIViewController {
             switch result {
             case .success(let friendData):
                 DispatchQueue.main.async {
-                    friendData.response.forEach { data in
-                        if data.status == 2 {
+                    friendData.forEach { data in
+                        if data.status == 0 {
                             self.requestList.append(data)
                         } else {
                             self.friendList.append(data)
@@ -229,7 +229,11 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.selectionStyle = .none
             let friend = requestList[indexPath.row]
-            cell.expanded(isExpanded: self.isExpanded)
+            if requestList.count == 1 {
+                cell.expanded(isExpanded: true)
+            } else {
+                cell.expanded(isExpanded: self.isExpanded)
+            }
             cell.configureWithoutImage(name: friend.name, liked: true)
             return cell
         default:
@@ -259,10 +263,8 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                self.isExpanded = !self.isExpanded
-                self.tableView.reloadData()
-            }
+            self.isExpanded = !self.isExpanded
+            self.tableView.reloadData()
         }
     }
 }

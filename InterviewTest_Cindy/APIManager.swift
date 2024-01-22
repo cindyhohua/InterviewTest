@@ -25,6 +25,12 @@ enum APIEndpoint: String {
     case friend4 = "friend4.json"
 }
 
+enum Condition {
+    case noData
+    case onlyFriendsData
+    case friendsDataAndRequest
+}
+
 enum APIError: Error {
     case invalidURL
     case noData
@@ -38,19 +44,64 @@ class APIManager {
     
     let urlString = "https://dimanyen.github.io/"
     
-    typealias FetchCompletion<T> = (Result<T, APIError>) -> Void
+    typealias FetchCompletion = (Result<[Response], APIError>) -> Void
     
-    var endPoint: APIEndpoint = .friend3
+    var condition: Condition = .noData
     
-    func fetchFriendData(completion: @escaping FetchCompletion<APIResponse>) {
-        guard let url = URL(string: urlString + endPoint.rawValue) else {
-            completion(.failure(.invalidURL))
-            return
+    func fetchFriendData(completion: @escaping FetchCompletion) {
+        let endpoints: [APIEndpoint]
+        
+        switch condition {
+        case .noData:
+            endpoints = [.friend4]
+        case .onlyFriendsData:
+            endpoints = [.friend1, .friend2]
+        case .friendsDataAndRequest:
+            endpoints = [.friend3]
         }
-        fetchData(from: url, completion: completion)
+        
+        let dispatchGroup = DispatchGroup()
+        var data: [Response] = []
+        
+        for endpoint in endpoints {
+            guard let url = URL(string: urlString + endpoint.rawValue) else {
+                completion(.failure(.invalidURL))
+                return
+            }
+            
+            dispatchGroup.enter()
+            fetchData(from: url) { result in
+                switch result {
+                case .success(let response):
+                    data += response
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.notify(queue: DispatchQueue.global()) {
+            var latestRecords: [String: Response] = [:]
+            for datum in data {
+                if let existingRecord = latestRecords[datum.fid ?? ""] {
+                    let existingUpdateDate = String(
+                        existingRecord.updateDate?.filter { $0.isNumber } ?? "")
+                    let newUpdateDate = String(
+                        datum.updateDate?.filter { $0.isNumber } ?? "")
+                    if existingUpdateDate < newUpdateDate {
+                        latestRecords[datum.fid ?? ""] = datum
+                    }
+                } else {
+                    latestRecords[datum.fid ?? ""] = datum
+                }
+            }
+            let latestRecordsArray = Array(latestRecords.values)
+            completion(.success(latestRecordsArray))
+        }
     }
     
-    func fetchUserData(completion: @escaping FetchCompletion<APIResponse>) {
+    func fetchUserData(completion: @escaping FetchCompletion) {
         guard let url = URL(string: urlString + APIEndpoint.userData.rawValue) else {
             completion(.failure(.invalidURL))
             return
@@ -58,7 +109,7 @@ class APIManager {
         fetchData(from: url, completion: completion)
     }
     
-    private func fetchData<T: Codable>(from url: URL, completion: @escaping FetchCompletion<T>) {
+    private func fetchData(from url: URL, completion: @escaping FetchCompletion) {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(.jsonParsingError(error)))
@@ -72,8 +123,8 @@ class APIManager {
             
             do {
                 let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(T.self, from: data)
-                completion(.success(decodedData))
+                let decodedData = try decoder.decode(APIResponse.self, from: data)
+                completion(.success(decodedData.response))
             } catch let parseError {
                 completion(.failure(.jsonParsingError(parseError)))
             }

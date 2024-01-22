@@ -38,6 +38,7 @@ class FriendsListTableViewCell: UITableViewCell {
        let button = UIButton()
         button.setTitle("轉帳", for: .normal)
         button.setTitleColor(.kokoPink, for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         button.titleLabel?.font = UIFont.textStyle5
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1.2
@@ -50,6 +51,7 @@ class FriendsListTableViewCell: UITableViewCell {
         button.setTitle("邀請中", for: .normal)
         button.setTitleColor(.brownGrey, for: .normal)
         button.titleLabel?.font = UIFont.textStyle5
+        button.contentEdgeInsets = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
         button.layer.cornerRadius = 2
         button.layer.borderWidth = 1.2
         button.layer.borderColor = UIColor.pinkishGrey.cgColor
@@ -131,14 +133,12 @@ class FriendsListTableViewCell: UITableViewCell {
         pendingButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(contentView).offset(-20)
-            make.width.equalTo(60)
             make.height.equalTo(24)
         }
         contentView.addSubview(trasferButton)
         trasferButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(pendingButton.snp.leading).offset(-10)
-            make.width.equalTo(47)
             make.height.equalTo(24)
         }
     }
@@ -147,13 +147,11 @@ class FriendsListTableViewCell: UITableViewCell {
         friendMoreButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(contentView).offset(-30)
-            make.width.equalTo(18)
         }
         contentView.addSubview(trasferButton)
         trasferButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(friendMoreButton.snp.leading).offset(-25)
-            make.width.equalTo(47)
             make.height.equalTo(24)
         }
     }
