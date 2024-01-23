@@ -11,7 +11,6 @@
 		3EC542398F288E4F9BE63F9E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FBCF92265E8C9D23DB357E /* Pods_InterviewTest_Cindy_InterviewTest_CindyUITests.framework */; };
 		CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179202B5B8D540051DEE3 /* AppDelegate.swift */; };
 		CA3179232B5B8D540051DEE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */; };
-		CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */; };
 		CA3179282B5B8D540051DEE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA3179262B5B8D540051DEE3 /* Main.storyboard */; };
 		CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA3179292B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld */; };
 		CA31792D2B5B8D6D0051DEE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */; };
@@ -30,6 +29,8 @@
 		CA3179662B5D563F0051DEE3 /* ChooseAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179652B5D563F0051DEE3 /* ChooseAPIViewController.swift */; };
 		CA3179682B5E0CDA0051DEE3 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179672B5E0CDA0051DEE3 /* NoDataView.swift */; };
 		CA31796C2B5F929C0051DEE3 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796B2B5F929C0051DEE3 /* UserHeaderView.swift */; };
+		CA31796E2B5FA0D10051DEE3 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796D2B5FA0D10051DEE3 /* FriendViewController.swift */; };
+		CA3179702B5FA0EA0051DEE3 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796F2B5FA0EA0051DEE3 /* FriendViewModel.swift */; };
 		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +64,6 @@
 		CA31791D2B5B8D540051DEE3 /* InterviewTest_Cindy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InterviewTest_Cindy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3179202B5B8D540051DEE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		CA3179272B5B8D540051DEE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA31792A2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterviewTest_Cindy.xcdatamodel; sourceTree = "<group>"; };
 		CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +85,8 @@
 		CA3179652B5D563F0051DEE3 /* ChooseAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAPIViewController.swift; sourceTree = "<group>"; };
 		CA3179672B5E0CDA0051DEE3 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		CA31796B2B5F929C0051DEE3 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		CA31796D2B5FA0D10051DEE3 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		CA31796F2B5FA0EA0051DEE3 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +170,7 @@
 				CA3179692B5E4CBD0051DEE3 /* Model */,
 				CA31796A2B5E4CF50051DEE3 /* View */,
 				CA3179652B5D563F0051DEE3 /* ChooseAPIViewController.swift */,
-				CA3179242B5B8D540051DEE3 /* FriendsViewController.swift */,
+				CA3179712B5FA0F50051DEE3 /* FriendsViewController */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
 				CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */,
 				CA31792E2B5B8D6D0051DEE3 /* LaunchScreen.storyboard */,
@@ -217,6 +219,15 @@
 				CA3179672B5E0CDA0051DEE3 /* NoDataView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CA3179712B5FA0F50051DEE3 /* FriendsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CA31796D2B5FA0D10051DEE3 /* FriendViewController.swift */,
+				CA31796F2B5FA0EA0051DEE3 /* FriendViewModel.swift */,
+			);
+			path = FriendsViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,12 +475,13 @@
 				CA3179682B5E0CDA0051DEE3 /* NoDataView.swift in Sources */,
 				CA31796C2B5F929C0051DEE3 /* UserHeaderView.swift in Sources */,
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
-				CA3179252B5B8D540051DEE3 /* FriendsViewController.swift in Sources */,
 				CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */,
+				CA3179702B5FA0EA0051DEE3 /* FriendViewModel.swift in Sources */,
 				CA3179642B5D29970051DEE3 /* RequestTableViewCell.swift in Sources */,
 				CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */,
 				CA3179622B5D1D9F0051DEE3 /* SegmentFooterView.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
+				CA31796E2B5FA0D10051DEE3 /* FriendViewController.swift in Sources */,
 				CA3179582B5BB77F0051DEE3 /* APIManager.swift in Sources */,
 				CA31792B2B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld in Sources */,
 				CA3179232B5B8D540051DEE3 /* SceneDelegate.swift in Sources */,

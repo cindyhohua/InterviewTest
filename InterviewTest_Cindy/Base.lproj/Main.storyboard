@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Friends View Controller-->
+        <!--Friend View Controller-->
         <scene sceneID="Wic-NU-2fg">
             <objects>
-                <viewController id="Cch-Rc-A3P" customClass="FriendsViewController" customModule="InterviewTest_Cindy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Cch-Rc-A3P" customClass="FriendViewController" customModule="InterviewTest_Cindy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YBp-gr-Zjd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
