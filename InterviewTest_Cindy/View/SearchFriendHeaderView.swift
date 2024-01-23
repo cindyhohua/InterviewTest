@@ -46,7 +46,7 @@ class SearchFriendHeaderView: UIView {
         searchBar.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(30)
             make.height.equalTo(36)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(15)
         }
         
         addFriendButton.snp.makeConstraints { make in

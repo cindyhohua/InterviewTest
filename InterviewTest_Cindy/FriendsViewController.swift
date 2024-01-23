@@ -10,39 +10,18 @@ import SnapKit
 import PullToRefreshKit
 
 class FriendsViewController: UIViewController {
+    var userData: [Response] = []
     var friendList: [Response] = []
     var requestList: [Response] = []
     var filteredFriendList: [Response] = []
     var isExpanded: Bool = false
     
-    let tableView = UITableView(frame: .zero, style: .plain)
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
     let rectangleView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteTwo
         return view
-    }()
-    
-    lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.textStyle4
-        label.textColor = UIColor.greyishBrown
-        return label
-    }()
-    
-    lazy var idLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.textStyle
-        label.textColor = UIColor.greyishBrown
-        return label
-    }()
-    
-    let userImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "imgFriendsFemaleDefault")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
     }()
     
     override func viewDidLoad() {
@@ -69,12 +48,8 @@ class FriendsViewController: UIViewController {
             switch result {
             case .success(let userData):
                 DispatchQueue.main.async {
-                    self.nameLabel.text = userData[0].name
-                    if let kokoid = userData[0].kokoid {
-                        self.idLabel.text = "KOKO ID：" + kokoid
-                    } else {
-                        self.idLabel.text = "設定KOKO ID"
-                    }
+                    self.userData = userData
+                    print(userData)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -120,26 +95,26 @@ class FriendsViewController: UIViewController {
     
     func addRectangleView() {
         view.addSubview(rectangleView)
-        rectangleView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(view).offset(30)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(35)
-        }
-        rectangleView.addSubview(idLabel)
-        idLabel.snp.makeConstraints { make in
-            make.leading.equalTo(nameLabel)
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
-        }
-        rectangleView.addSubview(userImageView)
-        userImageView.snp.makeConstraints { make in
-            make.trailing.equalTo(view).offset(-30)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(37)
-            make.height.width.equalTo(52)
-        }
-        userImageView.layer.cornerRadius = 26
+//        rectangleView.addSubview(nameLabel)
+//        nameLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(view).offset(30)
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(35)
+//        }
+//        rectangleView.addSubview(idLabel)
+//        idLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(nameLabel)
+//            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+//        }
+//        rectangleView.addSubview(userImageView)
+//        userImageView.snp.makeConstraints { make in
+//            make.trailing.equalTo(view).offset(-30)
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(37)
+//            make.height.width.equalTo(52)
+//        }
+//        userImageView.layer.cornerRadius = 26
         rectangleView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view)
-            make.bottom.equalTo(idLabel).offset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
     }
     
@@ -149,6 +124,7 @@ class FriendsViewController: UIViewController {
 extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func setupTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = .realWhite
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -185,6 +161,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section{
+        case 0:
+            let headerView = UserHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: CGFloat.leastNormalMagnitude))
+            if !userData.isEmpty {
+                headerView.setupLabel(name: userData[0].name, kokoId: userData[0].kokoid ?? "")
+            }
+            return headerView
         case 1:
             if friendList.count != 0 {
                 let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
@@ -202,10 +184,10 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section{
         case 0:
-            return 0
+            return 85
         default:
             if friendList.count != 0 {
-                return 40
+                return 60
             } else {
                 return 500
             }
@@ -283,17 +265,12 @@ extension FriendsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FriendsViewController: SearchFriendHeaderViewDelegate {
     func didChangeSearchText(_ searchText: String) {
-        print(searchText)
-        filterContentForSearchText(searchText)
-    }
-    
-    func filterContentForSearchText(_ searchText: String) {
-            if searchText.isEmpty {
-                filteredFriendList = friendList
-            } else {
-                filteredFriendList = friendList.filter { $0.name.contains(searchText) }
-            }
-            tableView.reloadData()
+        if searchText.isEmpty {
+            filteredFriendList = friendList
+        } else {
+            filteredFriendList = friendList.filter { $0.name.contains(searchText) }
         }
+        tableView.reloadData()
+    }
 }
 

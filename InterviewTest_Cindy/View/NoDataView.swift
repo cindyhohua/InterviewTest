@@ -69,7 +69,7 @@ class NoDataView: UIView {
         backgroundColor = .realWhite
         addSubview(emptyFriendImageView)
         emptyFriendImageView.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(10)
+            make.top.equalTo(self).offset(30)
             make.leading.equalTo(self).offset(65)
             make.trailing.equalTo(self).offset(-65)
             make.height.equalTo(172)
