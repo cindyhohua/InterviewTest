@@ -158,7 +158,9 @@
         <scene sceneID="hDY-Fn-lHx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y0D-tc-nvN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icTabbarHomeOff" selectedImage="icTabbarHomeOff" id="n5z-QU-Ivm"/>
+                    <tabBarItem key="tabBarItem" title="" image="icTabbarHomeOff" selectedImage="icTabbarHomeOff" id="n5z-QU-Ivm">
+                        <inset key="imageInsets" minX="0.0" minY="-4" maxX="0.0" maxY="4"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q4S-en-T2a">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
