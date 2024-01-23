@@ -12,6 +12,7 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
     private(set) var friendList: [Response] = []
     private(set) var requestList: [Response] = []
     private(set) var isExpanded: Bool = false
+    @Published private(set) var searchBarIsToggled: Bool = false
 
     func fetchUserData() {
         APIManager.shared.fetchUserData { [weak self] result in
@@ -55,5 +56,13 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
         } else {
             filteredFriendList = friendList.filter { $0.name.contains(searchText) }
         }
+    }
+    
+    func didEndedSearchText() {
+        searchBarIsToggled = false
+    }
+    
+    func didBeginSearchText() {
+        searchBarIsToggled = true
     }
 }

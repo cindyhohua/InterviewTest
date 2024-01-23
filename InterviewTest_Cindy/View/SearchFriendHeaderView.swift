@@ -10,6 +10,8 @@ import SnapKit
 
 protocol SearchFriendHeaderViewDelegate: AnyObject {
     func didChangeSearchText(_ searchText: String)
+    func didBeginSearchText()
+    func didEndedSearchText()
 }
 
 class SearchFriendHeaderView: UIView {
@@ -61,6 +63,15 @@ class SearchFriendHeaderView: UIView {
 extension SearchFriendHeaderView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         delegate?.didChangeSearchText(searchText)
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        delegate?.didEndedSearchText()
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        delegate?.didBeginSearchText()
     }
 }
 

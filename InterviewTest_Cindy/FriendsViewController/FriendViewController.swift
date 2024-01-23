@@ -17,6 +17,8 @@ class FriendViewController: UIViewController {
         view.backgroundColor = UIColor.whiteTwo
         return view
     }()
+    
+    lazy var searchHeaderView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
 
     lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -74,11 +76,15 @@ class FriendViewController: UIViewController {
         viewModel.$filteredFriendList
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                print("qq")
                 self?.updateUI()
             }
             .store(in: &cancellables)
-
+        viewModel.$searchBarIsToggled
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.updateUI()
+            }
+            .store(in: &cancellables)
         viewModel.fetchUserData()
         viewModel.fetchFriendData()
     }
@@ -94,119 +100,92 @@ class FriendViewController: UIViewController {
 }
 
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
+    private func configureCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        let identifier = viewModel.searchBarIsToggled ? "friendList" : (indexPath.section == 0 ? "requestList" : "friendList")
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        
+        if let requestCell = cell as? RequestTableViewCell, !viewModel.searchBarIsToggled && indexPath.section == 0 {
+            let request = viewModel.requestList[indexPath.row]
+            requestCell.expanded(isExpanded: viewModel.requestList.count == 1 || viewModel.isExpanded)
+            requestCell.configureWithoutImage(name: request.name, liked: true)
+        } else if let friendCell = cell as? FriendsListTableViewCell {
+            let friend = viewModel.filteredFriendList[indexPath.row]
+            friendCell.configureWithoutImage(name: friend.name, liked: friend.isTop == "1")
+            friendCell.configurePending(pending: friend.status != 1)
+        }
+        
+        cell.selectionStyle = .none
+        return cell
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        viewModel.searchBarIsToggled ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !viewModel.searchBarIsToggled {
+            switch section {
+            case 0:
+                switch viewModel.requestList.count {
+                case 0: return 0
+                default: return viewModel.isExpanded ? viewModel.requestList.count : 1
+                }
+            case 1: return viewModel.filteredFriendList.count
+            default: return 0
+            }
+        } else {
+            return viewModel.filteredFriendList.count
+        }
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return configureCell(for: tableView, at: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if viewModel.searchBarIsToggled {
+            return searchHeaderView
+        }
         switch section {
         case 0:
-            switch viewModel.requestList.count {
-            case 0: return 0
-            default: return viewModel.isExpanded ? viewModel.requestList.count : 1
-            }
-        case 1: return viewModel.filteredFriendList.count
-        default: return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "requestList",
-                for: indexPath) as? RequestTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.selectionStyle = .none
-            let request = viewModel.requestList
-            if viewModel.requestList.count == 1 {
-                cell.expanded(isExpanded: true)
-            } else {
-                cell.expanded(isExpanded: viewModel.isExpanded)
-            }
-            cell.configureWithoutImage(name: request[indexPath.row].name , liked: true)
-            return cell
-        default:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "friendList",
-                for: indexPath) as? FriendsListTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.selectionStyle = .none
-            let friend = viewModel.filteredFriendList[indexPath.row]
-            switch friend.isTop {
-            case "1":
-                cell.configureWithoutImage(name: friend.name, liked: true)
-            default:
-                cell.configureWithoutImage(name: friend.name, liked: false)
-            }
-            switch friend.status {
-            case 1:
-                cell.configurePending(pending: false)
-            default:
-                cell.configurePending(pending: true)
-
-            }
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section{
-        case 0:
             let headerView = UserHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: CGFloat.leastNormalMagnitude))
-            let userData = viewModel.userData
-            if !userData.isEmpty {
-                headerView.setupLabel(name: userData[0].name, kokoId: userData[0].kokoid ?? "")
+            if let firstUser = viewModel.userData.first {
+                headerView.setupLabel(name: firstUser.name, kokoId: firstUser.kokoid ?? "")
             }
             return headerView
         case 1:
-            if viewModel.friendList.count != 0 {
-                let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
-                headerView.delegate = viewModel
-                return headerView
-            } else {
-                let headerView = NoDataView(frame: .zero)
-                return headerView
-            }
-        default: return nil
+            searchHeaderView.delegate = viewModel
+            return viewModel.friendList.isEmpty ? NoDataView(frame: .zero) : searchHeaderView
+        default:
+            return nil
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section{
-        case 0: return 85
-        default:
-            if viewModel.friendList.count != 0 {
-                return 60
-            } else {
-                return 500
-            }
-        }
+        return !viewModel.searchBarIsToggled && section == 0 ? 85 : 60
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        switch section{
-        case 0:
-            let count = viewModel.friendList.filter { $0.status == 2 }.count
-            let view = FooterView(frame: .zero, buttonBadge: [count, 100])
-            return view
-        default: return nil
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section{
-        case 0: return 40
-        default: return 0
+        if !viewModel.searchBarIsToggled {
+            switch section{
+            case 0:
+                let count = viewModel.friendList.filter { $0.status == 2 }.count
+                let view = FooterView(frame: .zero, buttonBadge: [count, 100])
+                return view
+            default: return nil
+            }
+        } else {
+            return nil
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return !viewModel.searchBarIsToggled && section == 0 ? 40 : 0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            viewModel.changeExpended()
-            self.updateUI()
-        }
+        guard !viewModel.searchBarIsToggled && indexPath.section == 0 else { return }
+        viewModel.changeExpended()
+        updateUI()
     }
     
     func setupTableView() {

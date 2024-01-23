@@ -14,6 +14,12 @@ class UserHeaderView: UIView {
         return label
     }()
     
+    private var renameButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "icInfoBackDeepGray"), for: .normal)
+        return button
+    }()
+    
     private var idLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.textStyle
@@ -58,6 +64,12 @@ class UserHeaderView: UIView {
         idLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel)
             make.top.equalTo(self.snp.centerY).offset(4)
+        }
+        addSubview(renameButton)
+        renameButton.snp.makeConstraints { make in
+            make.leading.equalTo(idLabel.snp.trailing)
+            make.width.height.equalTo(18)
+            make.centerY.equalTo(idLabel)
         }
         addSubview(userImageView)
         userImageView.snp.makeConstraints { make in
