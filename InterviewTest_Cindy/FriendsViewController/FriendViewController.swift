@@ -10,10 +10,9 @@ import Combine
 import PullToRefreshKit
 
 class FriendViewController: UIViewController {
-    let viewModel = FriendsViewModel()
-    var cancellables = Set<AnyCancellable>()
-    
-    let rectangleView: UIView = {
+    private let viewModel = FriendsViewModel()
+    private var cancellables = Set<AnyCancellable>()
+    private let rectangleView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteTwo
         return view
@@ -38,8 +37,8 @@ class FriendViewController: UIViewController {
         setupRefreshHeader()
         viewModelBinding()
     }
-    
-    func setupNavigationItem() {
+
+    private func setupNavigationItem() {
         navigationItem.leftBarButtonItems = [createWithdrawButton(), createTransferButton()]
         navigationItem.rightBarButtonItem = createScanButton()
     }
@@ -57,7 +56,7 @@ class FriendViewController: UIViewController {
     }
 
     
-    func addRectangleView() {
+    private func addRectangleView() {
         view.addSubview(rectangleView)
         rectangleView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view)
@@ -71,17 +70,20 @@ class FriendViewController: UIViewController {
         }
     }
     
-    func viewModelBinding() {
-        viewModel.$filteredFriendList.sink { [weak self] _ in
-            self?.updateUI()
-        }
-        .store(in: &cancellables)
-        
+    private func viewModelBinding() {
+        viewModel.$filteredFriendList
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                print("qq")
+                self?.updateUI()
+            }
+            .store(in: &cancellables)
+
         viewModel.fetchUserData()
         viewModel.fetchFriendData()
     }
 
-    func updateUI() {
+    private func updateUI() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.tableView.switchRefreshHeader(to: .normal(.success, 0.5))
@@ -89,7 +91,6 @@ class FriendViewController: UIViewController {
     }
 
     @objc func buttonTapped() {}
-    
 }
 
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {

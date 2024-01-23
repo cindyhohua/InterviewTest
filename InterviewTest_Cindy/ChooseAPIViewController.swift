@@ -9,6 +9,13 @@ import UIKit
 import SnapKit
 
 class ChooseAPIViewController: UIViewController {
+    private let introductionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "切換資料來源後進入朋友頁面下滑以更新"
+        label.font = .textStyle
+        label.textColor = .brownGrey
+        return label
+    }()
     private let friend12Button = createButton(title: Condition.onlyFriendsData.rawValue, tag: 0)
     private let friend3Button = createButton(title: Condition.friendsDataAndRequest.rawValue, tag: 1)
     private let friend4Button = createButton(title: Condition.noData.rawValue, tag: 2)
@@ -48,6 +55,7 @@ class ChooseAPIViewController: UIViewController {
         view.addSubview(friend12Button)
         view.addSubview(friend3Button)
         view.addSubview(friend4Button)
+        view.addSubview(introductionLabel)
         friend12Button.backgroundColor = .appleGreen
         friend3Button.snp.makeConstraints { make in
             make.centerX.equalTo(view)
@@ -60,6 +68,10 @@ class ChooseAPIViewController: UIViewController {
         friend4Button.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.centerY.equalTo(view).offset(60)
+        }
+        introductionLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(friend12Button).offset(-100)
+            make.centerX.equalTo(view)
         }
     }
 }

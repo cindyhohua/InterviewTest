@@ -7,10 +7,10 @@
 
 import Combine
 class FriendsViewModel: SearchFriendHeaderViewDelegate {
+    @Published private(set) var filteredFriendList: [Response] = []
     private(set) var userData: [Response] = []
     private(set) var friendList: [Response] = []
     private(set) var requestList: [Response] = []
-    @Published private(set) var filteredFriendList: [Response] = []
     private(set) var isExpanded: Bool = false
 
     func fetchUserData() {

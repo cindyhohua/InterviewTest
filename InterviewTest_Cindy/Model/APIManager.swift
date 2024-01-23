@@ -39,96 +39,94 @@ enum APIError: Error {
 
 class APIManager {
     private init() {}
-    
     static let shared = APIManager()
-    
-    let urlString = "https://dimanyen.github.io/"
+    let baseURLString = "https://dimanyen.github.io/"
     
     typealias FetchCompletion = (Result<[Response], APIError>) -> Void
     
     var condition: Condition = .onlyFriendsData
     
     func fetchFriendData(completion: @escaping FetchCompletion) {
-        let endpoints: [APIEndpoint]
-        
         switch condition {
         case .noData:
-            endpoints = [.friend4]
+            fetchData(endpoint: .friend4, completion: completion)
         case .onlyFriendsData:
-            endpoints = [.friend1, .friend2]
+            fetchMultipleEndpoints(endpoints: [.friend1, .friend2], completion: completion)
         case .friendsDataAndRequest:
-            endpoints = [.friend3]
-        }
-        
-        let dispatchGroup = DispatchGroup()
-        var data: [Response] = []
-        
-        for endpoint in endpoints {
-            guard let url = URL(string: urlString + endpoint.rawValue) else {
-                completion(.failure(.invalidURL))
-                return
-            }
-            
-            dispatchGroup.enter()
-            fetchData(from: url) { result in
-                switch result {
-                case .success(let response):
-                    data += response
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-                dispatchGroup.leave()
-            }
-        }
-        
-        dispatchGroup.notify(queue: DispatchQueue.global()) {
-            var latestRecords: [String: Response] = [:]
-            for datum in data {
-                if let existingRecord = latestRecords[datum.fid ?? ""] {
-                    let existingUpdateDate = String(
-                        existingRecord.updateDate?.filter { $0.isNumber } ?? "")
-                    let newUpdateDate = String(
-                        datum.updateDate?.filter { $0.isNumber } ?? "")
-                    if existingUpdateDate < newUpdateDate {
-                        latestRecords[datum.fid ?? ""] = datum
-                    }
-                } else {
-                    latestRecords[datum.fid ?? ""] = datum
-                }
-            }
-            let latestRecordsArray = Array(latestRecords.values)
-            completion(.success(latestRecordsArray))
+            fetchData(endpoint: .friend3, completion: completion)
         }
     }
     
     func fetchUserData(completion: @escaping FetchCompletion) {
-        guard let url = URL(string: urlString + APIEndpoint.userData.rawValue) else {
+        fetchData(endpoint: .userData, completion: completion)
+    }
+    
+    private func fetchMultipleEndpoints(endpoints: [APIEndpoint], completion: @escaping FetchCompletion) {
+        let group = DispatchGroup()
+        var allData: [Response] = []
+        
+        for endpoint in endpoints {
+            group.enter()
+            fetchData(endpoint: endpoint) { result in
+                switch result {
+                case .success(let data):
+                    allData += data
+                case .failure(_):
+                    break
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .global()) {
+            let uniqueLatestData = self.getLatestRecords(from: allData)
+            completion(.success(uniqueLatestData))
+        }
+    }
+    
+    private func fetchData(endpoint: APIEndpoint, completion: @escaping FetchCompletion) {
+        guard let url = URL(string: baseURLString + endpoint.rawValue) else {
             completion(.failure(.invalidURL))
             return
         }
-        fetchData(from: url, completion: completion)
-    }
-    
-    private func fetchData(from url: URL, completion: @escaping FetchCompletion) {
+        
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                completion(.failure(.jsonParsingError(error)))
+            guard error == nil else {
+                completion(.failure(.jsonParsingError(error!)))
                 return
             }
-            
             guard let data = data else {
                 completion(.failure(.noData))
                 return
             }
-            
             do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(APIResponse.self, from: data)
+                let decodedData = try JSONDecoder().decode(APIResponse.self, from: data)
                 completion(.success(decodedData.response))
-            } catch let parseError {
-                completion(.failure(.jsonParsingError(parseError)))
+            } catch {
+                completion(.failure(.jsonParsingError(error)))
             }
         }
         task.resume()
     }
+
+    private func getLatestRecords(from data: [Response]) -> [Response] {
+        var latestRecords: [String: Response] = [:]
+        data.forEach { datum in
+            guard let fid = datum.fid, let newUpdateDate = datum.updateDate?.filter({ $0.isNumber }) else { return }
+            if let existingRecord = latestRecords[fid],
+               let existingUpdateDate = existingRecord.updateDate?.filter({ $0.isNumber }),
+               existingUpdateDate >= newUpdateDate {
+                return
+            }
+            latestRecords[fid] = datum
+        }
+        
+        return latestRecords.values.sorted(by: { (left, right) in
+            guard let leftFid = left.fid, let rightFid = right.fid else {
+                return left.fid != nil 
+            }
+            return leftFid < rightFid
+        })
+    }
+
 }

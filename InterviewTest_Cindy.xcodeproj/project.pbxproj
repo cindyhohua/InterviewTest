@@ -167,9 +167,9 @@
 			children = (
 				CA3179202B5B8D540051DEE3 /* AppDelegate.swift */,
 				CA3179222B5B8D540051DEE3 /* SceneDelegate.swift */,
+				CA3179652B5D563F0051DEE3 /* ChooseAPIViewController.swift */,
 				CA3179692B5E4CBD0051DEE3 /* Model */,
 				CA31796A2B5E4CF50051DEE3 /* View */,
-				CA3179652B5D563F0051DEE3 /* ChooseAPIViewController.swift */,
 				CA3179712B5FA0F50051DEE3 /* FriendsViewController */,
 				CA3179262B5B8D540051DEE3 /* Main.storyboard */,
 				CA31792C2B5B8D6D0051DEE3 /* Assets.xcassets */,
