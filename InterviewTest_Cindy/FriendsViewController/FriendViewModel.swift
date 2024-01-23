@@ -5,14 +5,13 @@
 //  Created by 賀華 on 2024/1/23.
 //
 
+import Combine
 class FriendsViewModel: SearchFriendHeaderViewDelegate {
-    private var userData: [Response] = []
-    private var friendList: [Response] = []
-    private var requestList: [Response] = []
-    private var filteredFriendList: [Response] = []
-    private var isExpanded: Bool = false
-
-    var reloadDataHandler: (() -> Void)?
+    private(set) var userData: [Response] = []
+    private(set) var friendList: [Response] = []
+    private(set) var requestList: [Response] = []
+    @Published private(set) var filteredFriendList: [Response] = []
+    private(set) var isExpanded: Bool = false
 
     func fetchUserData() {
         APIManager.shared.fetchUserData { [weak self] result in
@@ -31,7 +30,6 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
             case .success(let friendData):
                 self?.friendList.removeAll()
                 self?.requestList.removeAll()
-
                 friendData.forEach { data in
                     if data.status == 0 {
                         self?.requestList.append(data)
@@ -41,31 +39,10 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
                 }
                 self?.isExpanded = false
                 self?.filteredFriendList = self?.friendList ?? []
-                self?.reloadDataHandler?()
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func getUserData() -> [Response] {
-        return userData
-    }
-    
-    func getRequestList() -> [Response] {
-        return requestList
-    }
-    
-    func getFriendList() -> [Response] {
-        return friendList
-    }
-    
-    func getFilteredFriendList() -> [Response] {
-        return filteredFriendList
-    }
-    
-    func getIsExpended() -> Bool {
-        return isExpanded
     }
     
     func changeExpended() {
@@ -78,6 +55,5 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
         } else {
             filteredFriendList = friendList.filter { $0.name.contains(searchText) }
         }
-        self.reloadDataHandler?()
     }
 }

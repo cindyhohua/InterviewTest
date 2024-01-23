@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 import PullToRefreshKit
 
 class FriendViewController: UIViewController {
     let viewModel = FriendsViewModel()
+    var cancellables = Set<AnyCancellable>()
     
     let rectangleView: UIView = {
         let view = UIView()
@@ -70,9 +72,11 @@ class FriendViewController: UIViewController {
     }
     
     func viewModelBinding() {
-        viewModel.reloadDataHandler = { [weak self] in
+        viewModel.$filteredFriendList.sink { [weak self] _ in
             self?.updateUI()
         }
+        .store(in: &cancellables)
+        
         viewModel.fetchUserData()
         viewModel.fetchFriendData()
     }
@@ -96,11 +100,11 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            switch viewModel.getRequestList().count {
+            switch viewModel.requestList.count {
             case 0: return 0
-            default: return viewModel.getIsExpended() ? viewModel.getRequestList().count : 1
+            default: return viewModel.isExpanded ? viewModel.requestList.count : 1
             }
-        case 1: return viewModel.getFilteredFriendList().count
+        case 1: return viewModel.filteredFriendList.count
         default: return 0
         }
     }
@@ -114,11 +118,11 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.selectionStyle = .none
-            let request = viewModel.getRequestList()
-            if viewModel.getRequestList().count == 1 {
+            let request = viewModel.requestList
+            if viewModel.requestList.count == 1 {
                 cell.expanded(isExpanded: true)
             } else {
-                cell.expanded(isExpanded: viewModel.getIsExpended())
+                cell.expanded(isExpanded: viewModel.isExpanded)
             }
             cell.configureWithoutImage(name: request[indexPath.row].name , liked: true)
             return cell
@@ -129,7 +133,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.selectionStyle = .none
-            let friend = viewModel.getFilteredFriendList()[indexPath.row]
+            let friend = viewModel.filteredFriendList[indexPath.row]
             switch friend.isTop {
             case "1":
                 cell.configureWithoutImage(name: friend.name, liked: true)
@@ -151,13 +155,13 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         switch section{
         case 0:
             let headerView = UserHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: CGFloat.leastNormalMagnitude))
-            let userData = viewModel.getUserData()
+            let userData = viewModel.userData
             if !userData.isEmpty {
                 headerView.setupLabel(name: userData[0].name, kokoId: userData[0].kokoid ?? "")
             }
             return headerView
         case 1:
-            if viewModel.getFriendList().count != 0 {
+            if viewModel.friendList.count != 0 {
                 let headerView = SearchFriendHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
                 headerView.delegate = viewModel
                 return headerView
@@ -173,7 +177,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         switch section{
         case 0: return 85
         default:
-            if viewModel.getFriendList().count != 0 {
+            if viewModel.friendList.count != 0 {
                 return 60
             } else {
                 return 500
@@ -184,7 +188,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section{
         case 0:
-            let count = viewModel.getFriendList().filter { $0.status == 2 }.count
+            let count = viewModel.friendList.filter { $0.status == 2 }.count
             let view = FooterView(frame: .zero, buttonBadge: [count, 100])
             return view
         default: return nil
