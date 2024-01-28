@@ -28,6 +28,9 @@
 		CA31796C2B5F929C0051DEE3 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796B2B5F929C0051DEE3 /* UserHeaderView.swift */; };
 		CA31796E2B5FA0D10051DEE3 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796D2B5FA0D10051DEE3 /* FriendViewController.swift */; };
 		CA3179702B5FA0EA0051DEE3 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA31796F2B5FA0EA0051DEE3 /* FriendViewModel.swift */; };
+		CA3179732B6630650051DEE3 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179722B6630650051DEE3 /* UnitTest.swift */; };
+		CA3179752B6631B20051DEE3 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3179742B6631B20051DEE3 /* MockAPIManager.swift */; };
+		CAB283F92B66455E0025A01B /* NCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB283F82B66455E0025A01B /* NCExtension.swift */; };
 		EF418FF5DE8B5B678F71C44A /* Pods_InterviewTest_Cindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885996D5B1091FD6DDD4DCA /* Pods_InterviewTest_Cindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,9 @@
 		CA31796B2B5F929C0051DEE3 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		CA31796D2B5FA0D10051DEE3 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		CA31796F2B5FA0EA0051DEE3 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		CA3179722B6630650051DEE3 /* UnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
+		CA3179742B6631B20051DEE3 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
+		CAB283F82B66455E0025A01B /* NCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,7 @@
 				CA31792E2B5B8D6D0051DEE3 /* LaunchScreen.storyboard */,
 				CA3179312B5B8D6D0051DEE3 /* Info.plist */,
 				CA3179292B5B8D540051DEE3 /* InterviewTest_Cindy.xcdatamodeld */,
+				CA3179722B6630650051DEE3 /* UnitTest.swift */,
 			);
 			path = InterviewTest_Cindy;
 			sourceTree = "<group>";
@@ -177,7 +184,9 @@
 			children = (
 				CA3179552B5BA4250051DEE3 /* ColorExtension.swift */,
 				CA3179592B5BBAAA0051DEE3 /* FontExtension.swift */,
+				CAB283F82B66455E0025A01B /* NCExtension.swift */,
 				CA3179572B5BB77F0051DEE3 /* APIManager.swift */,
+				CA3179742B6631B20051DEE3 /* MockAPIManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 					};
 					CA3179352B5B8D6E0051DEE3 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = CA31791C2B5B8D540051DEE3;
 					};
 					CA31793F2B5B8D6E0051DEE3 = {
@@ -450,9 +460,11 @@
 				CA3179682B5E0CDA0051DEE3 /* NoDataView.swift in Sources */,
 				CA31796C2B5F929C0051DEE3 /* UserHeaderView.swift in Sources */,
 				CA3179562B5BA4250051DEE3 /* ColorExtension.swift in Sources */,
+				CA3179752B6631B20051DEE3 /* MockAPIManager.swift in Sources */,
 				CA31795C2B5BC1980051DEE3 /* SegmentView.swift in Sources */,
 				CA3179702B5FA0EA0051DEE3 /* FriendViewModel.swift in Sources */,
 				CA3179642B5D29970051DEE3 /* RequestTableViewCell.swift in Sources */,
+				CAB283F92B66455E0025A01B /* NCExtension.swift in Sources */,
 				CA31795A2B5BBAAA0051DEE3 /* FontExtension.swift in Sources */,
 				CA3179622B5D1D9F0051DEE3 /* SegmentFooterView.swift in Sources */,
 				CA3179212B5B8D540051DEE3 /* AppDelegate.swift in Sources */,
@@ -467,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA3179732B6630650051DEE3 /* UnitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,15 +705,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N4C7YMWND2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cindyhohua.InterviewTest-CindyTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InterviewTest_Cindy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InterviewTest_Cindy";
@@ -713,11 +733,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N4C7YMWND2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cindyhohua.InterviewTest-CindyTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

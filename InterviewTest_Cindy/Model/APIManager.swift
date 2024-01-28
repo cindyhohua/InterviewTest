@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol APIManagerProtocol {
+    func fetchUserData(completion: @escaping (Result<[Response], APIError>) -> Void)
+    func fetchFriendData(completion: @escaping (Result<[Response], APIError>) -> Void)
+    var condition: Condition { get set }
+}
+
 struct APIResponse: Codable {
     let response: [Response]
 }
@@ -37,9 +43,9 @@ enum APIError: Error {
     case jsonParsingError(Error)
 }
 
-class APIManager {
-    private init() {}
-    static let shared = APIManager()
+class APIManager: APIManagerProtocol {
+    init() {}
+//    static let shared = APIManager()
     let baseURLString = "https://dimanyen.github.io/"
     
     typealias FetchCompletion = (Result<[Response], APIError>) -> Void

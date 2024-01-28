@@ -10,7 +10,7 @@ import Combine
 import PullToRefreshKit
 
 class FriendViewController: UIViewController {
-    private let viewModel = FriendsViewModel()
+    var viewModel = FriendsViewModel(apiManager: APIManager())
     private var cancellables = Set<AnyCancellable>()
     private let rectangleView: UIView = {
         let view = UIView()
@@ -39,6 +39,8 @@ class FriendViewController: UIViewController {
         setupRefreshHeader()
         viewModelBinding()
     }
+    
+
 
     private func setupNavigationItem() {
         navigationItem.leftBarButtonItems = [createWithdrawButton(), createTransferButton()]

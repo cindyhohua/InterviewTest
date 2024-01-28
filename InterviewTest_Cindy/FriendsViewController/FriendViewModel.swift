@@ -6,6 +6,9 @@
 //
 
 import Combine
+import UIKit
+import Foundation
+
 class FriendsViewModel: SearchFriendHeaderViewDelegate {
     @Published private(set) var filteredFriendList: [Response] = []
     private(set) var userData: [Response] = []
@@ -13,9 +16,19 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
     private(set) var requestList: [Response] = []
     private(set) var isExpanded: Bool = false
     @Published private(set) var searchBarIsToggled: Bool = false
-
+    
+    private var apiManager: APIManagerProtocol
+    init(apiManager: APIManagerProtocol) {
+        self.apiManager = apiManager
+        NotificationCenter.default.addObserver(self, selector: #selector(handleConditionChange), name: .apiManagerConditionDidChange, object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .apiManagerConditionDidChange, object: nil)
+    }
+    
+    
     func fetchUserData() {
-        APIManager.shared.fetchUserData { [weak self] result in
+        apiManager.fetchUserData { [weak self] result in
             switch result {
             case .success(let userData):
                 self?.userData = userData
@@ -26,7 +39,7 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
     }
 
     func fetchFriendData() {
-        APIManager.shared.fetchFriendData { [weak self] result in
+        apiManager.fetchFriendData { [weak self] result in
             switch result {
             case .success(let friendData):
                 self?.friendList.removeAll()
@@ -43,6 +56,14 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    @objc func handleConditionChange(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let newCondition = userInfo["newCondition"] as? Condition {
+            apiManager.condition = newCondition
+            fetchFriendData()
         }
     }
     
