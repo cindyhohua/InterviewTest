@@ -9,9 +9,16 @@ import Foundation
 class MockAPIManager: APIManagerProtocol {
     var condition: Condition = .onlyFriendsData
     
-    
     var mockUserDataResult: Result<[Response], APIError>?
     var mockFriendDataResult: Result<[Response], APIError>?
+    
+    init() {
+        if let url = Bundle.main.url(forResource: "userJSON", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let userData = try? JSONDecoder().decode(APIResponse.self, from: data) {
+            self.mockUserDataResult = .success(userData.response)
+        }
+    }
     
     func fetchUserData(completion: @escaping (Result<[Response], APIError>) -> Void) {
         if let result = mockUserDataResult {

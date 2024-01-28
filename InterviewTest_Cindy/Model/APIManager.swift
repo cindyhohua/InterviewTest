@@ -17,10 +17,17 @@ struct APIResponse: Codable {
     let response: [Response]
 }
 
-struct Response: Codable {
+struct Response: Codable, Equatable {
     let name: String
     let isTop, fid, updateDate, kokoid: String?
     let status: Int?
+    static func == (lhs: Response, rhs: Response) -> Bool {
+        if let lhsKokoid = lhs.kokoid, let rhsKokoid = rhs.kokoid {
+            return lhs.name == rhs.name && lhsKokoid == rhsKokoid
+        } else {
+            return lhs.name == rhs.name && lhs.isTop == rhs.isTop && lhs.fid == rhs.fid && lhs.status == rhs.status
+        }
+    }
 }
 
 enum APIEndpoint: String {
@@ -45,7 +52,7 @@ enum APIError: Error {
 
 class APIManager: APIManagerProtocol {
     init() {}
-//    static let shared = APIManager()
+    
     let baseURLString = "https://dimanyen.github.io/"
     
     typealias FetchCompletion = (Result<[Response], APIError>) -> Void

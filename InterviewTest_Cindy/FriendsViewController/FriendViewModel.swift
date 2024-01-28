@@ -31,6 +31,7 @@ class FriendsViewModel: SearchFriendHeaderViewDelegate {
         apiManager.fetchUserData { [weak self] result in
             switch result {
             case .success(let userData):
+                print("qq", userData)
                 self?.userData = userData
             case .failure(let error):
                 print(error.localizedDescription)
