@@ -10,7 +10,8 @@ class UserHeaderView: UIView {
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.textStyle4
-        label.textColor = UIColor.blue
+        label.textColor = UIColor.black
+
         return label
     }()
     
