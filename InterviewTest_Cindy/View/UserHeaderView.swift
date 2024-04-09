@@ -11,6 +11,7 @@ class UserHeaderView: UIView {
         let label = UILabel()
         label.font = UIFont.textStyle4
         label.textColor = UIColor.black
+
         return label
     }()
     
